@@ -22,7 +22,7 @@ const Signup = () => {
         setError('');
         try {
             // Yeh hamari API hit ho rahi hai!
-            const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
+           const res = await axios.post('https://note-x-backend-1yxupnl3u-priyanshu-projects2.vercel.app/api/auth/signup', formData);
             setMessage(res.data.message); // "User registered safely!"
             setFormData({ name: '', email: '', password: '' }); // Form clear kar do
         } catch (err) {

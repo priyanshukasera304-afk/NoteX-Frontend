@@ -21,7 +21,7 @@ const Login = () => {
         setError('');
         try {
             // 🔥 Login API ko hit kiya (Backend wala URL)
-            const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+           const res = await axios.post('https://note-x-backend-1yxupnl3u-priyanshu-projects2.vercel.app/api/auth/login', formData);
             
             setMessage(res.data.message || "Login successful, maza aa gaya!");
             
