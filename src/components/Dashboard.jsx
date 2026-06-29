@@ -19,7 +19,7 @@ const Dashboard = () => {
     const token = localStorage.getItem('token');
 
     // Live Backend Base URL Variable
-    const BACKEND_URL = 'https://note-x-backend-priyanshu-projects2.vercel.app';
+    const BACKEND_URL = 'https://note-x-backend.vercel.app';
 
     // 1. USER PROFILE AND NOTES FETCH LOGIC
     useEffect(() => {
