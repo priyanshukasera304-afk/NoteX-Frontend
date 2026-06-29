@@ -8,9 +8,9 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
 
     // 📝 NOTES KI STATES
-    const [notes, setNotes] = useState([]); 
-    const [title, setTitle] = useState(''); 
-    const [description, setDescription] = useState(''); 
+    const [notes, setNotes] = useState([]);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
     // 🔥 EDITING KI STATES (New Additions)
     const [isEditing, setIsEditing] = useState(false); // Track karega ki Edit chal raha hai ya Create
@@ -19,7 +19,7 @@ const Dashboard = () => {
     const token = localStorage.getItem('token');
 
     // Live Backend Base URL Variable
-    const BACKEND_URL = 'https://note-x-backend.vercel.app';
+    const BACKEND_URL = 'https://note-x-backend-priyanshu-projects2.vercel.app';
 
     // 1. USER PROFILE AND NOTES FETCH LOGIC
     useEffect(() => {
@@ -40,7 +40,7 @@ const Dashboard = () => {
                 const notesRes = await axios.get(`${BACKEND_URL}/api/notes/all`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                setNotes(notesRes.data.notes); 
+                setNotes(notesRes.data.notes);
 
                 setLoading(false);
             } catch (error) {
@@ -99,7 +99,7 @@ const Dashboard = () => {
 
             if (res.data.success) {
                 // UI ko update karne ke liye map chalayenge aur purane note ko naye se replace kar denge
-                const updatedNotes = notes.map(note => 
+                const updatedNotes = notes.map(note =>
                     note._id === editingId ? res.data.note : note
                 );
                 setNotes(updatedNotes);
@@ -136,7 +136,7 @@ const Dashboard = () => {
             if (res.data.success) {
                 const updatedNotes = notes.filter(note => note._id !== id);
                 setNotes(updatedNotes);
-                
+
                 // Agar chalte edit me kisi ne wahi note delete kar diya toh form reset karo
                 if (editingId === id) {
                     setTitle('');
@@ -199,7 +199,7 @@ const Dashboard = () => {
                         <h2 className="text-xl font-bold mb-4 text-teal-400">
                             {isEditing ? "Note Edit Karo ✏️" : "Naya Note Jodho ✍️"}
                         </h2>
-                        
+
                         <form onSubmit={handleFormSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Note Title</label>
@@ -221,7 +221,7 @@ const Dashboard = () => {
                                     className="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-teal-500 transition resize-none"
                                 />
                             </div>
-                            
+
                             {/* 🔥 Button text dynamically badlega */}
                             <button
                                 type="submit"
