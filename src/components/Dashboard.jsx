@@ -18,6 +18,9 @@ const Dashboard = () => {
 
     const token = localStorage.getItem('token');
 
+    // Live Backend Base URL Variable
+    const BACKEND_URL = 'https://note-x-backend.vercel.app';
+
     // 1. USER PROFILE AND NOTES FETCH LOGIC
     useEffect(() => {
         const fetchDashboardData = async () => {
@@ -27,14 +30,14 @@ const Dashboard = () => {
             }
 
             try {
-                // 📡 API 1: User Profile Fetch Karo
-                const userRes = await axios.get('http://localhost:5000/api/auth/profile', {
+                // 📡 API 1: User Profile Fetch Karo (LIVE URL)
+                const userRes = await axios.get(`${BACKEND_URL}/api/auth/profile`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUserData(userRes.data);
 
-                // 📡 API 2: User Ke Saare Notes Fetch Karo
-                const notesRes = await axios.get('http://localhost:5000/api/notes/all', {
+                // 📡 API 2: User Ke Saare Notes Fetch Karo (LIVE URL)
+                const notesRes = await axios.get(`${BACKEND_URL}/api/notes/all`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setNotes(notesRes.data.notes); 
@@ -67,10 +70,10 @@ const Dashboard = () => {
         }
     };
 
-    // 🔥 FUNCTION 1: NAYA NOTE ADD KARNA
+    // 🔥 FUNCTION 1: NAYA NOTE ADD KARNA (LIVE URL)
     const handleAddNote = async () => {
         try {
-            const res = await axios.post('http://localhost:5000/api/notes/create',
+            const res = await axios.post(`${BACKEND_URL}/api/notes/create`,
                 { title, description },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -86,10 +89,10 @@ const Dashboard = () => {
         }
     };
 
-    // 🔥 FUNCTION 2: NOTE UPDATE (EDIT) KARNA
+    // 🔥 FUNCTION 2: NOTE UPDATE (EDIT) KARNA (LIVE URL)
     const handleUpdateNote = async () => {
         try {
-            const res = await axios.put(`http://localhost:5000/api/notes/update/${editingId}`,
+            const res = await axios.put(`${BACKEND_URL}/api/notes/update/${editingId}`,
                 { title, description },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -121,12 +124,12 @@ const Dashboard = () => {
         setDescription(note.description);
     };
 
-    // 🗑️ FUNCTION 4: NOTE DELETE KARNE KA HANDLE
+    // 🗑️ FUNCTION 4: NOTE DELETE KARNE KA HANDLE (LIVE URL)
     const handleDeleteNote = async (id) => {
         if (!window.confirm("Bhai, sach me is note ka safaya karna hai?")) return;
 
         try {
-            const res = await axios.delete(`http://localhost:5000/api/notes/delete/${id}`, {
+            const res = await axios.delete(`${BACKEND_URL}/api/notes/delete/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -161,6 +164,8 @@ const Dashboard = () => {
             </div>
         );
     }
+
+    // Baaki ka return statement jahan JSX components (HTML/Tailwind) hain, wahi purane code wala rahega...
 
     return (
         <div className="min-h-screen bg-gray-950 font-sans text-white p-6 relative">
